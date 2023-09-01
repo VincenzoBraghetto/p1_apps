@@ -9,6 +9,7 @@ import TripsPage from "./components/TripsPage";
 import BottomBar from "./components/BottomBar/BottomBar";
 import TopNav from "./components/TopNav/TopNav";
 import HomePage from "./components/HomePage/HomePage";
+import LoginPage from "./components/LoginPage/LoginPage";
 import FriendsPage from "./components/FriendsPage/FriendsPage";
 import MapPage from "./components/MapPage/MapPage";
 import SearchPage from "./components/SearchPage/SearchPage";
@@ -26,6 +27,7 @@ function App() {
                         <Route exact path="/friends" element={<FriendsPage />} />
                         <Route exact path="/map" element={<MapPage />} />
                         <Route exact path="/search" element={<SearchPage />} />
+                        <Route exact path="/login" element={<LoginPage />} />
                     </Routes>
                 </div>
                 <BottomBar />

@@ -9,7 +9,7 @@
 .BoxNav{
                  width: 100%;
                  height: 85px;
-                 background-color: rgba(162, 250, 163, 0.9);
+                 background-color: #0ca789;
                  flex-direction: column;
                  display: flex;
                  position: fixed;
@@ -30,14 +30,13 @@
                             width: 200px;
                             height: 50px;
                             margin-top: 17px;
-                            margin-right: 17px;
+                            margin-right: 60px;
                             position: absolute;
     right: 0;
-    font-family: cursive;
-    font-style: italic;
+    font-family: roboto;
     font-weight: bolder;
     font-size: 27px;
     line-height: 50px;
-    color: #0470a6;
+    color: "black";
     text-align: center;
                         }

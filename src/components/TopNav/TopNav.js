@@ -25,7 +25,7 @@ function TopNav(props) {
           onClick={handleClick}
           sx={{ position: 'absolute', top: '16px', left: '16px' }}
         >
-          <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" left={0} position={"absolute"} />
+          <img src="/Travel log.png" alt= "Travel Log" width= "90%" style={{ position: 'absolute', top: '1px', left: '5px' }}/>
 
         </Button>
 
