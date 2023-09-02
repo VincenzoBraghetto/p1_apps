@@ -26,7 +26,7 @@ const authLink = setContext((_, {headers}) => {
 });
 
 const hostname = window.location.hostname;
-const baseUrl = `http://${hostname}:7890/`
+const baseUrl = `http://${hostname}:3000/`
 let gqlUrl = `${baseUrl}/api/v1/graphql`;
 
 const gqlHTTPLink = createHttpLink({

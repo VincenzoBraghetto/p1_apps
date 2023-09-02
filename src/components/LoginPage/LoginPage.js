@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { TextField, Button, Typography, Paper, Container, Grid } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
   const [formData, setFormData] = useState({ email: '', password: '' });
+  const [token, setToken] = useState(null);
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -11,28 +14,27 @@ function LoginPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
-    try {
+
+      const headers = new Headers({
+        'Authorization': `Basic ${btoa(`${formData.email}:${formData.password}`)}`, // Utiliza formData.email y formData.password
+        'Content-Type': 'application/json',
+      });
+    
+    
       const response = await fetch('http://localhost:3000/api/v1/api-keys', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers,
         body: JSON.stringify(formData),
       });
-      console.log(response);
-      if (response.ok) {
-        const data = await response.json();
-        const token = data.token;
-        // Guardar el token en localStorage o en un estado global.
-        // Redirigir al usuario a la página de inicio, por ejemplo.
-      } else {
-        // Manejar errores de autenticación aquí.
-      }
-    } catch (error) {
-      console.error('Error al iniciar sesión:', error);
-    }
-  };
+      const data = await response.json();
+      const authToken = data.token;
+      setToken(authToken);
+      localStorage.setItem('token', authToken);
+      navigate('/trips');
+
+      
+    }; 
+  
   return (
     <div style={{justifyContent: 'center', alignItems: 'center', minHeight: '100vh', marginLeft: "60px", marginTop: "150px"}}>
       <Typography variant="h4">Inicio de Sesión</Typography>
