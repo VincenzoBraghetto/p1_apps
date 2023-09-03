@@ -1,29 +1,36 @@
-.trip-card {
-    max-width: 300px; /* Ajusta el valor según tus necesidades */
-  }
-  h1 {
-    font-size: 36px;
-    font-weight: bold;
-    text-align: center;
-    color: #333;
-    text-shadow: 2px 2px #ccc;
-  }
+.my-card {
+  background-color: #CFD8DCff;
+  max-width: 400px;
+  margin: 0 auto;
+}
 
-  .card-custom-background {
-    background-color: #CAE6EBff;
-  }
+.image-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
-  @media screen and (max-width: 600px) {
-    /* Aplica los estilos necesarios para centrar elementos */
-    .trip-card {
-      text-align: center; /* Centra el texto horizontalmente */
-    }
-  }
-  .main-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centra horizontalmente */
-    justify-content: center; /* Centra verticalmente */
-  }
-  
-  
+.trip-image {
+  width: 100%; /* Asegura que la imagen ocupe todo el ancho disponible */
+  height: auto; /* Permite que la altura se ajuste automáticamente para mantener la proporción */
+  max-height: 400px; /* Establece una altura máxima para evitar que las imágenes sean demasiado grandes */
+  margin: 10px; /* Agrega espacio entre las imágenes */
+  border-radius: 10px;
+}
+
+.trip-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+  overflow-x: auto; /* Habilitar el desplazamiento horizontal */
+  white-space: nowrap; /* Evitar el salto de línea en los elementos */
+  max-width: 100%; /* Asegurar que el contenido se ajuste al ancho de la pantalla */
+}
+
+.image-container {
+  display: flex;
+  overflow-x: auto; /* Habilitar el desplazamiento horizontal para las imágenes */
+  max-width: 100%; /* Asegurar que las imágenes se ajusten al ancho de la pantalla */
+}
+
