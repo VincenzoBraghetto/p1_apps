@@ -13,14 +13,16 @@ import LoginPage from "./components/LoginPage/LoginPage";
 import FriendsPage from "./components/FriendsPage/FriendsPage";
 import MapPage from "./components/MapPage/MapPage";
 import SearchPage from "./components/SearchPage/SearchPage";
+import AuthProvider from './components/AuthContext';
 
 
 function App() {
     return (
         <div className="App">
+            <AuthProvider>
             <HashRouter>
                 <div className="App__content">
-                    <TopNav />
+                    <TopNav /> 
                     <Routes>
                         <Route exact path="/" element={<HomePage />} />
                         <Route exact path="/trips" element={<TripsPage />} />
@@ -32,6 +34,7 @@ function App() {
                 </div>
                 <BottomBar />
             </HashRouter>
+            </AuthProvider>
         </div>
 
     );

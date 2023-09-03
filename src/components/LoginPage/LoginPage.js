@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { TextField, Button, Typography, Paper, Container, Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../AuthContext.js';
 
 function LoginPage() {
+  const { setAuthToken, setUserId } = useAuth();
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [token, setToken] = useState(null);
   const navigate = useNavigate();
@@ -29,8 +31,22 @@ function LoginPage() {
       const data = await response.json();
       const authToken = data.token;
       setToken(authToken);
+      setAuthToken(authToken);
+      setUserId(data.bearer_id);
       localStorage.setItem('token', authToken);
-      navigate('/trips');
+      console.log(data.bearer_id);
+      fetch(`http://localhost:3000/api/v1/users/${data.bearer_id}/trips`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${authToken}`, // Asegúrate de que estás utilizando el token correcto aquí
+        },
+      })
+        .then((response2) => response2.json())
+        .then((data2) => {
+          // Procesar los datos de los viajes recibidos del servidor
+          console.log(data2);
+          navigate(`/trips`);
+        });
 
       
     }; 
