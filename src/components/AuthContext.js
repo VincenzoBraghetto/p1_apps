@@ -6,6 +6,8 @@ export default function AuthProvider({ children }) {
 
   const [authToken, setAuthToken] = useState('');
   const [userId, setUserId] = useState('');
+  const [FirstName, setFirstName] = useState('');
+  const [LastName, setLastName] = useState('');
 
   // function setUser({
   //   id, token
@@ -15,7 +17,8 @@ export default function AuthProvider({ children }) {
   // };
 
   return (
-    <AuthContext.Provider value={{ authToken, setAuthToken, userId, setUserId }}>
+    <AuthContext.Provider value={{ authToken, setAuthToken, userId, setUserId, FirstName, setFirstName,
+    LastName, setLastName }}>
       {children}
     </AuthContext.Provider>
   );

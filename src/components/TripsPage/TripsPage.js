@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 
 function TripsPage() {
-  const { authToken, userId } = useAuth();
+  const { authToken, userId, FirstName, LastName } = useAuth();
   const [trips, setTrips] = useState([]);
   const navigate = useNavigate();
 
@@ -32,14 +32,14 @@ function TripsPage() {
   }, [userId, navigate]);
 
   return (
-    <div style={{ justifyContent: 'center', alignItems: 'center', minHeight: '100vh', marginLeft: "60px", marginTop: "100px" }}>
-      <h1>Viajes de {userId}</h1>
+    <div style={{ justifyContent: 'center', alignItems: 'center', minHeight: '50vh', marginLeft: "10px", marginTop: "100px" }}>
+      <h1>Viajes de {FirstName + " " + LastName}</h1>
       <ul>
         {trips.map((trip) => (
           <li key={trip.id} className="trip-card">
             <Card sx={{
-              backgroundColor: '#CFD8DCff', // Color de fondo de la tarjeta
-              }}>
+              backgroundColor: '#CFD8DCff', 
+              }} style= {{marginLeft: "60px"}}>
               {/* Simulamos una imagen de viaje con un esqueleto */}
               <Skeleton
                 variant="rectangular"

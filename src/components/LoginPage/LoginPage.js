@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext.js';
 
 function LoginPage() {
-  const { setAuthToken, setUserId } = useAuth();
+  const { setAuthToken, setUserId, setFirstName, setLastName } = useAuth();
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [token, setToken] = useState(null);
   const navigate = useNavigate();
@@ -35,6 +35,20 @@ function LoginPage() {
       setUserId(data.bearer_id);
       localStorage.setItem('token', authToken);
       console.log(data.bearer_id);
+      fetch(`http://localhost:3000/api/v1/users/${formData.email}`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((userData) => {
+          console.log(response);
+          console.log(userData);
+          console.log("asdasd");
+          setFirstName(userData.first_name); // Asumiendo que el servidor envía el nombre del usuario
+          setLastName(userData.last_name); // Asumiendo que el servidor envía el correo electrónico del usuario
+        });
       fetch(`http://localhost:3000/api/v1/users/${data.bearer_id}/trips`, {
         method: 'GET',
         headers: {
@@ -52,7 +66,7 @@ function LoginPage() {
     }; 
   
   return (
-    <div style={{justifyContent: 'center', alignItems: 'center', minHeight: '100vh', marginLeft: "60px", marginTop: "150px"}}>
+    <div style={{justifyContent: 'center', alignItems: 'center', minHeight: '50vh', marginLeft: "60px", marginTop: "150px"}}>
       <Typography variant="h4">Inicio de Sesión</Typography>
       <form onSubmit={handleSubmit} style={{ width: '80%', marginTop: '16px' }}>
         <Grid container spacing={2}>
