@@ -5,6 +5,41 @@ import { CircularProgress, Card, CardContent, CardMedia, Typography } from '@mui
 import './TripPage.css';
 import MapPage from '../MapPage/MapPage.js';
 
+const DestinationsList = ({ tripId }) => {
+  const [destinations, setDestinations] = useState([]);
+  const { authToken} = useAuth();
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/api/v1/trips/${tripId}/destinations`,{
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+        'Content-Type': 'application/json',
+      }, 
+    })
+      .then(response => response.json())
+      .then(data => setDestinations(data))
+      .catch(error => console.error('Error al obtener destinos:', error));
+  }, [tripId]);
+
+  return (
+    <div>
+      <h2>Destinos Asociados al Viaje</h2>
+      <ul>
+        {destinations.map(destination => (
+          <li key={destination.id}>
+            <div>
+              <h3>{destination.name}</h3>
+              <p>Latitud: {destination.latitude}</p>
+              <p>Longitud: {destination.longitude}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
 function TripPage() {
   const { authToken } = useAuth();
   console.log(authToken);
@@ -91,8 +126,10 @@ function TripPage() {
     </div>
     <br />
     <MapPage tripId={tripId} />
+    <DestinationsList tripId={tripId} />
     </div>
   );
+
 }
 
 export default TripPage;

@@ -6,6 +6,8 @@ export default function AuthProvider({ children }) {
 
   const [authToken, setAuthToken] = useState('');
   const [userId, setUserId] = useState('');
+  const [tripId, setTripId] = useState('');
+  const [destinationId, setDestinationId] = useState('');
   const [FirstName, setFirstName] = useState('');
   const [LastName, setLastName] = useState('');
 
@@ -18,7 +20,7 @@ export default function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider value={{ authToken, setAuthToken, userId, setUserId, FirstName, setFirstName,
-    LastName, setLastName }}>
+    LastName, setLastName, setTripId, tripId, destinationId, setDestinationId}}>
       {children}
     </AuthContext.Provider>
   );
