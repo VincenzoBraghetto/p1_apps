@@ -1,0 +1,12 @@
+.map-container {
+    height: 100%;
+    width: 100%;
+    margin-top: 50px; /* Ajusta la cantidad de margen superior según tus necesidades */
+  }
+.button-container {
+    position: absolute;
+    top: 10px; /* Ajusta la posición vertical del botón según tus necesidades */
+    left: 10px; /* Ajusta la posición horizontal del botón según tus necesidades */
+    z-index: 1; /* Coloca el botón encima del mapa */
+}
+  

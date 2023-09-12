@@ -15,6 +15,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.5.0",
     "cors": "^2.8.5",
+    "google-map-react": "^2.2.1",
     "graphql": "^16.6.0",
     "graphql-tag": "^2.12.6",
     "material-ui-animated-fab": "^1.0.3",

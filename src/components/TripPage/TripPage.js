@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useAuth } from '../AuthContext.js';
 import { CircularProgress, Card, CardContent, CardMedia, Typography } from '@mui/material';
 import './TripPage.css';
+import MapPage from '../MapPage/MapPage.js';
 
 function TripPage() {
   const { authToken } = useAuth();
@@ -54,6 +55,7 @@ function TripPage() {
   }
 
   return (
+    <div>
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '100px' }}>
       {trip && (
         <Card className="my-card" sx={{ backgroundColor: '#CFD8DC' }} style={{ maxWidth: '400px' }}>
@@ -86,6 +88,9 @@ function TripPage() {
         </div>
       </Card>
       )}
+    </div>
+    <br />
+    <MapPage tripId={tripId} />
     </div>
   );
 }

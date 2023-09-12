@@ -15,6 +15,7 @@ import FriendsPage from "./components/FriendsPage/FriendsPage";
 import MapPage from "./components/MapPage/MapPage";
 import SearchPage from "./components/SearchPage/SearchPage";
 import AuthProvider from './components/AuthContext';
+import DestinationPage from './components/DestinationPage/DestinationPage';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
                         <Route exact path="/map" element={<MapPage />} />
                         <Route exact path="/search" element={<SearchPage />} />
                         <Route exact path="/login" element={<LoginPage />} />
+                        <Route exact path="/destination" element={<DestinationPage />} />
                     </Routes>
                 </div>
                 <BottomBar />
