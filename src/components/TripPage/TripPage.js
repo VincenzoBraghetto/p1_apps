@@ -1,52 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams , useNavigate} from 'react-router-dom';
 import { useAuth } from '../AuthContext.js';
 import { CircularProgress, Card, CardContent, CardMedia, Typography } from '@mui/material';
 import './TripPage.css';
 import MapPage from '../MapPage/MapPage.js';
 
-const DestinationsList = ({ tripId }) => {
-  const [destinations, setDestinations] = useState([]);
-  const { authToken} = useAuth();
-
-  useEffect(() => {
-    fetch(`http://localhost:3000/api/v1/trips/${tripId}/destinations`,{
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${authToken}`,
-        'Content-Type': 'application/json',
-      }, 
-    })
-      .then(response => response.json())
-      .then(data => setDestinations(data))
-      .catch(error => console.error('Error al obtener destinos:', error));
-  }, [tripId]);
-
-  return (
-    <div>
-      <h2>Destinos Asociados al Viaje</h2>
-      <ul>
-        {destinations.map(destination => (
-          <li key={destination.id}>
-            <div>
-              <h3>{destination.name}</h3>
-              <p>Latitud: {destination.latitude}</p>
-              <p>Longitud: {destination.longitude}</p>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-};
-
 function TripPage() {
   const { authToken } = useAuth();
+  const navigate = useNavigate();
   console.log(authToken);
   const { tripId } = useParams();
   const [trip, setTrip] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null); // Agregar estado para manejar errores
+
+  const handleAddDestination = () => {
+    navigate(`/trips/${tripId}/destination`);
+  };
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/v1/trips/${tripId}`, {
@@ -126,7 +96,9 @@ function TripPage() {
     </div>
     <br />
     <MapPage tripId={tripId} />
-    <DestinationsList tripId={tripId} />
+    <button style= {{marginTop: "40px", marginLeft: "85px", padding: "15px 25px", backgroundColor: "#00d02a",
+    borderRadius: "7px" , border: "1px solid #00d02a", fontSize: "20px", color: "white"}}
+    onClick={handleAddDestination}>Agregar Destino</button>
     </div>
   );
 

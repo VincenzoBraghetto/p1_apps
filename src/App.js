@@ -29,11 +29,12 @@ function App() {
                         <Route exact path="/" element={<HomePage />} />
                         <Route exact path="/trips" element={<TripsPage />} />
                         <Route exact path="/trips/:tripId" element={<TripPage />} />
+                        <Route exact path="/trips/:tripId/destinations" element={<TripPage />} />
                         <Route exact path="/friends" element={<FriendsPage />} />
                         <Route exact path="/map" element={<MapPage />} />
                         <Route exact path="/search" element={<SearchPage />} />
                         <Route exact path="/login" element={<LoginPage />} />
-                        <Route exact path="/destination" element={<DestinationPage />} />
+                        <Route path="/trips/:tripId/destination" element= {<DestinationPage />}/>
                     </Routes>
                 </div>
                 <BottomBar />

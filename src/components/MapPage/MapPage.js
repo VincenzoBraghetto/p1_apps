@@ -1,44 +1,50 @@
-import React from "react";
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
 import GoogleMapReact from "google-map-react";
-import { Button } from "@mui/material";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMapPin } from '@fortawesome/free-solid-svg-icons';
+import { useAuth } from '../AuthContext.js';
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
-function MapPage(props) {
-  const mapOptions = {
-    center: { lat: -34.397, lng: 150.644 }, // Ubicación por defecto
-    zoom: 8, // Nivel de zoom por defecto
-  };
+const MapPage = ({ tripId }) => {
+  const [markers, setMarkers] = useState([]);
+  const { authToken } = useAuth();
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/api/v1/trips/${tripId}/markers`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    })
+      .then(response => response.json())
+      .then(data => setMarkers(data))
+      .catch(error => console.error('Error al obtener marcadores:', error));
+  }, [tripId]);
 
   return (
-    <div className="map-container" style={{ height: "70%", width: "100%", marginTop: "85px" }}>
+    <div style={{ height: "600px", width: "375px" }}>
       <GoogleMapReact
-        bootstrapURLKeys={{
-          key: process.env.REACT_APP_GAPI_KEY,
-          libraries: ["geometry", "drawing", "places"], // Agrega las bibliotecas necesarias
-        }}
-        defaultCenter={mapOptions.center}
-        defaultZoom={mapOptions.zoom}
+        bootstrapURLKeys={{ key: "AIzaSyAzZKv1qMj4zuF5Q0eM5vmZonlrTjm6eZ8" }} // Reemplaza con tu clave de API de Google Maps
+        defaultCenter={{ lat: 0, lng: 0 }}
+        defaultZoom={1}
       >
-        {props.isMarkerShown && (
+        {markers.length > 0 && markers.map(marker => (
           <AnyReactComponent
-            lat={mapOptions.center.lat}
-            lng={mapOptions.center.lng}
-            text="Mi Marcador"
+            key={marker.id}
+            lat={marker.lat}
+            lng={marker.lon}
+            text={
+              <div>
+                <FontAwesomeIcon icon={faMapPin} style={{ color: '#ff1414', fontSize: '24px' }} />
+                {marker.name}
+              </div>
+            }
           />
-        )}
+        ))}
       </GoogleMapReact>
-
-      <div className="button-container">
-        <Link to={`/destination`}>
-          <Button variant="contained" color="success">
-            Destination
-          </Button>
-        </Link>
-      </div>
     </div>
   );
-}
+};
 
 export default MapPage;
