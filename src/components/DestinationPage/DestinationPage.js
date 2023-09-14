@@ -46,7 +46,7 @@ function MapWithSearch( ) {
     // Enviar una solicitud para crear el destino
     console.log(tripId);
     const fecha = new Date(anio, mes - 1, dia);
-    fetch('http://localhost:3000/api/v1/trips/${tripId}/destinations', {
+    fetch(`http://localhost:3000/api/v1/trips/${tripId}/destinations`, {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${authToken}`,

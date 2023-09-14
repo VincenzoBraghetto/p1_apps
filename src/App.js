@@ -16,6 +16,7 @@ import MapPage from "./components/MapPage/MapPage";
 import SearchPage from "./components/SearchPage/SearchPage";
 import AuthProvider from './components/AuthContext';
 import DestinationPage from './components/DestinationPage/DestinationPage';
+import DestinationOnly from './components/DestinationOnly/DestinationOnly';
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
                         <Route exact path="/search" element={<SearchPage />} />
                         <Route exact path="/login" element={<LoginPage />} />
                         <Route path="/trips/:tripId/destination" element= {<DestinationPage />}/>
+                        <Route path="/trips/:tripId/destinations/:destinationId" element= {<DestinationOnly />}/>
                     </Routes>
                 </div>
                 <BottomBar />
