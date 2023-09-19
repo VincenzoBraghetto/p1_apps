@@ -131,6 +131,19 @@ function MapWithSearch( ) {
   const handleAnioChange = (e) => {
     setAnio(e.target.value);
   };
+  
+  const rellenarFechaActual = () => {
+    const fechaActual = new Date();
+    const diaActual = fechaActual.getDate();
+    const mesActual = fechaActual.getMonth() + 1; // El mes en JavaScript se cuenta desde 0
+    const anioActual = fechaActual.getFullYear();
+  
+    setDia(diaActual.toString());
+    setMes(mesActual.toString());
+    setAnio(anioActual.toString());
+  };
+  
+  
 
   return (
     <div style={{ marginTop: "83px", position: "relative" }}>
@@ -208,6 +221,14 @@ function MapWithSearch( ) {
           placeholder="Ingrese el nombre del destino"
           value={nuevoDestino.nombre}
           onChange={(e) => setNuevoDestino({ ...nuevoDestino, nombre: e.target.value })}
+          style ={{
+            padding: "8px",
+            border: "1px solid #ccc",
+            borderRadius: "4px",
+            fontSize: "16px",
+            width: "100%",
+            marginTop: "4px"    
+          }}
         />
       </div>
 
@@ -219,40 +240,49 @@ function MapWithSearch( ) {
           placeholder="Ingrese la ubicación"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
+          style ={{
+            padding: "8px",
+            border: "1px solid #ccc",
+            borderRadius: "4px",
+            fontSize: "16px",
+            width: "100%",
+            marginTop: "4px"    
+          }}
         />
       </div>
       <div>
-        <button style= {{backgroundColor: "#0ca789", color: "white", border: "2px  solid #0ca789", marginTop: "6px", borderRadius: "3px"}}
+        <button style= {{backgroundColor: "#0ca789", color: "white", border: "7px  solid #0ca789", marginTop: "6px", borderRadius: "3px"}}
         onClick={searchLocation}>Buscar ubicación</button>
-        <button style= {{backgroundColor: "#0ca789", color: "white", border: "2px  solid #0ca789", borderRadius: "3px"}}
+        <button style= {{backgroundColor: "#0ca789", color: "white", border: "7px  solid #0ca789", borderRadius: "3px"}}
         onClick={locateUser}>Ubicación Actual</button> 
       </div>
       </div>
 
       <div style={{ marginBottom: "10px" }}>
         <label style= {{fontWeight: "bold"}}>Fecha de llegada:</label>
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex", alignItems: 'center' }}>
           <input
             type="text"
             placeholder="Día"
             value={dia}
             onChange={handleDiaChange}
-            style={{ width: "22px", marginRight: "5px" }}
+            style={{ width: '40px', marginRight: '5px', borderRadius: '5px' }}
           />
           <input
             type="text"
             placeholder="Mes"
             value={mes}
             onChange={handleMesChange}
-            style={{ width: "22px", marginRight: "5px" }}
+            style={{ width: '40px', marginRight: '5px', borderRadius: '5px' }}
           />
           <input
             type="text"
             placeholder="Año"
             value={anio}
             onChange={handleAnioChange}
-            style={{ width: "38px" }}
+            style={{ width: '40px', marginRight: '5px', borderRadius: '5px' }}
           />
+          <button onClick={rellenarFechaActual} style= {{width: '100px', marginRight: '5px', borderRadius: '5px'}}>Usar Fecha Actual</button>
         </div>
       </div>
     </form>
