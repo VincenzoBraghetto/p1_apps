@@ -1,45 +1,42 @@
 //Create starter component
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Box } from "@mui/material";
 import SpinnerOfDoom from "../HomePage/SpinnerOfDoom";
 import { useLocation } from "react-router-dom";
 import { useAuth } from '../AuthContext.js';
 
-function FriendshipTokenHandler() {
-    const location = useLocation();
-    const { authToken } = useAuth();
+function FriendsPage() {
+  const location = useLocation();
+  const { authToken } = useAuth();
+  const [qrImageUrl, setQrImageUrl] = useState(null);
 
-    useEffect(() => {
-        const queryParams = new URLSearchParams(location.search);
-        const friendshipToken = queryParams.get('friendshipToken');
-        
-        if (friendshipToken) {
-            // Enviar el token al backend para crear relación de amistad
-            fetch(`http://localhost:3000/friendship_tokens`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${authToken}`,
-                },
-                body: JSON.stringify({ friendshipToken }),
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Manejar la respuesta del backend si es necesario
-            })
-            .catch(error => {
-                console.error('Error al enviar token al backend:', error);
-            });
-        }
-    }, [location.search]);
-}
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    console.log("holanda")
 
-function FriendsPage(props) {
-    return (
-        <Box>
-            < SpinnerOfDoom color={'secondary.main'} />
-        </Box>
-    );
+    const friendshipToken = queryParams.get('friendshipToken');
+    // Realizar una solicitud al backend para obtener la imagen del QR
+    fetch(`http://localhost:3000/api/v1/friendship_tokens/show`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${authToken}`,
+      },
+    })
+    .then(response => response.json())
+    .then(data => {
+        setQrImageUrl(data.qr);
+      console.log(qrImageUrl) ;
+    })
+    .catch(error => {
+      console.error('Error al obtener el código QR:', error);
+    });
+  }, [location.search]);
+
+  return (
+    <div>
+        {qrImageUrl && <img src={`data:image/png;base64,${qrImageUrl}`} alt="Código QR" />}
+    </div>
+  );
 }
 
 export default FriendsPage;
