@@ -8,7 +8,7 @@ import { useAuth } from '../AuthContext.js';
 function FriendsPage() {
   const location = useLocation();
   const { authToken } = useAuth();
-  const [qrImageUrl, setQrImageUrl] = useState(null);
+  const [qr, setQr] = useState(null); // Aquí definimos el estado qr
 
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
@@ -22,10 +22,10 @@ function FriendsPage() {
         Authorization: `Bearer ${authToken}`,
       },
     })
-    .then(response => response.json())
-    .then(data => {
-        setQrImageUrl(data.qr);
-      console.log(qrImageUrl) ;
+    .then(response => response.blob())
+    .then(blob => {
+        const imageUrl = URL.createObjectURL(blob);
+        setQr(imageUrl);
     })
     .catch(error => {
       console.error('Error al obtener el código QR:', error);
@@ -33,9 +33,9 @@ function FriendsPage() {
   }, [location.search]);
 
   return (
-    <div>
-        {qrImageUrl && <img src={`data:image/png;base64,${qrImageUrl}`} alt="Código QR" />}
-    </div>
+  <div style={{ marginTop: '100px' }}>
+      <img src={qr} alt="Código QR" />
+  </div>
   );
 }
 
