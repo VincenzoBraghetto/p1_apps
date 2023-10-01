@@ -1,0 +1,42 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Tres columnas con ancho igual */
+    gap: 10px; /* Espacio entre imágenes */
+  }
+  
+  .grid-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .grid-item img {
+    max-width: 100%; /* Ajusta el tamaño de la imagen */
+    height: auto; /* Mantén la proporción de aspecto */
+  }
+
+  .zoomed-image-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  
+  .zoomed-image-container.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  .zoomed-image {
+    max-width: 80%;
+    max-height: 80%;
+    object-fit: contain;
+  }

@@ -17,6 +17,9 @@ import SearchPage from "./components/SearchPage/SearchPage";
 import AuthProvider from './components/AuthContext';
 import DestinationPage from './components/DestinationPage/DestinationPage';
 import DestinationOnly from './components/DestinationOnly/DestinationOnly';
+import FriendshipPage from './components/FriendshipPage/FriendshipPage';
+import PostsPage from './components/PostsPage/PostsPage';
+import PostPage from './components/PostPage/PostPage';
 
 
 function App() {
@@ -37,6 +40,9 @@ function App() {
                         <Route exact path="/login" element={<LoginPage />} />
                         <Route path="/trips/:tripId/destination" element= {<DestinationPage />}/>
                         <Route path="/trips/:tripId/destinations/:destinationId" element= {<DestinationOnly />}/>
+                        <Route path="/friendship/:friendshipToken" element={<FriendshipPage />} />
+                        <Route path="/trips/:tripId/posts" element={<PostsPage />} />
+                        <Route path="/trips/:tripId/posts/:postId" element={<PostPage />} />
                     </Routes>
                 </div>
                 <BottomBar />

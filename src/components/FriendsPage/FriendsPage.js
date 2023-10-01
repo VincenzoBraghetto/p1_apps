@@ -7,6 +7,8 @@ import { useAuth } from '../AuthContext.js';
 
 function FriendsPage() {
   const location = useLocation();
+  console.log(location);
+  console.log("petardo");
   const { authToken } = useAuth();
   const [qr, setQr] = useState(null); // Aquí definimos el estado qr
 

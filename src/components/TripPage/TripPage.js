@@ -18,6 +18,10 @@ function TripPage() {
     navigate(`/trips/${tripId}/destination`);
   };
 
+  const handleGoToPosts = () => {
+    navigate(`/trips/${tripId}/posts`);
+  };
+
   useEffect(() => {
     fetch(`http://localhost:3000/api/v1/trips/${tripId}`, {
       method: 'GET',
@@ -96,9 +100,13 @@ function TripPage() {
     </div>
     <br />
     <MapPage tripId={tripId} />
-    <button style= {{marginTop: "40px", marginLeft: "85px", padding: "15px 25px", backgroundColor: "#00d02a",
+    <button style= {{marginTop: "16px", marginLeft: "85px", padding: "15px 25px", backgroundColor: "#00d02a",
     borderRadius: "7px" , border: "1px solid #00d02a", fontSize: "20px", color: "white"}}
     onClick={handleAddDestination}>Agregar Destino</button>
+    <br/>
+    <button style= {{marginTop: "10px", marginLeft: "132px", padding: "15px 25px", backgroundColor: "#66e8fa",
+    borderRadius: "7px" , border: "1px solid #66e8fa", fontSize: "20px", color: "white"}}
+    onClick={handleGoToPosts}> Posts </button>
     </div>
   );
 
